@@ -1,70 +1,81 @@
 # CampaignForge
 
-**Replacing hours of manual content repurposing with a deterministic agentic workflow.**
+**Replacing hours of manual content repurposing with a deterministic, agentic workflow.**
 
-CampaignForge is an "Autonomous Content Factory" that ingests raw technical documents and transforms them into multi-channel marketing campaigns (Blogs, Social Threads, and Email Teasers) while strictly enforcing brand tone and factual accuracy. 
+CampaignForge is an **Autonomous Content Factory** that ingests raw technical documents or web URLs and transforms them into high-converting, multi-channel marketing campaigns (Blogs, Social Threads, and Email Teasers) while strictly enforcing factual accuracy and brand integrity.
 
-Unlike traditional LLM wrappers that hallucinate freely, CampaignForge runs a robust self-correcting feedback loop between a creative Copywriter agent and an Editor-in-Chief gatekeeper, grounded by deterministic fact-extraction.
+Unlike traditional LLM wrappers that hallucinate freely, CampaignForge employs a **LangGraph-driven multi-agent pipeline** featuring a feedback loop between specialized agents, grounded by deterministic guardrails.
 
-## Architectural Details
+---
 
-The system relies on a modern decoupled architecture:
+## 🚀 Key MVP Features
 
-- **Frontend UI (Next.js + Tailwind CSS)**: Provides a premium, responsive "Agent Room" dashboard. It streams agent states in real-time using Server-Sent Events (SSE).
-- **Backend Orchestration (LangGraph + FastAPI)**: A reactive Python backend containing the cyclic state machine controlling the agent assembly line.
-- **LLM Engine (Gemini 1.5 Flash)**: Optimized for deep context windows and heavily constrained through strict Pydantic JSON schemas.
+- 📂 **Multi-modal Data Ingestion**: Seamlessly ingest information via raw text, file uploads (`.txt`, `.md`), or automated URL scraping using BeautifulSoup4.
+- 🧠 **The "Ambiguity Brain"**: A Lead Researcher agent that not only extracts facts but also flags "marketing fluff" and vague, unquantified statements for human review.
+- 🛡️ **Deterministic Guardrails**: An Editor-in-Chief agent that uses regex-based deterministic checks (e.g., preventing unverified pricing/currency mentions) before performing semantic LLM validation.
+- ⚡ **Real-Time Agent UI**: A premium Next.js dashboard featuring SSE (Server-Sent Events) streaming, an "Active Agent Room" for status tracking, and a responsive side-by-side layout.
+- 📱 **Adaptive Previews**: Instantly toggle between **Desktop** and **Mobile** views to visualize how your campaign assets look on different devices.
+- 📦 **1-Click Asset Export**: Export your entire verified campaign—including individual text files and a structured JSON fact-sheet—as a single `.zip` bundle.
+
+---
+
+## 🏗️ Architectural Details
+
+CampaignForge uses a decoupled, reactive architecture designed for scalability and reliability:
+
+- **Frontend UI (Next.js 15+ + Tailwind CSS)**: A state-of-the-art dashboard that handles file processing, real-time streaming updates, and dynamic preview rendering.
+- **Backend Orchestration (LangGraph + FastAPI)**: A robust Python backend managing a cyclic state machine that governs the agent assembly line and ensures loop-back on rejection.
+- **LLM Engine (Llama 3.3 70B via Groq)**: Powered by Groq's high-speed inference for near-instant agent responses and superior reasoning capabilities.
 
 ### The Agent Assembly Line
-1. **Lead Research Agent**: Ingests raw text into a strict JSON Fact-Sheet.
-2. **Creative Copywriter Agent**: Receives the facts and drafts the campaign assets.
-3. **Editor-in-Chief Agent**: Validates drafts against the JSON facts using deterministic guardrails and LLM semantic checks. Loops back to the Copywriter if hallucinations are detected (max 3 revisions).
+1. **Lead Research Agent**: Parses technical data into a strict JSON Fact-Sheet and identifies ambiguities.
+2. **Creative Copywriter Agent**: Drafts campaign assets based solely on verified facts.
+3. **Editor-in-Chief Agent**: Validates drafts using a mix of deterministic Regex guardrails and LLM semantic cross-referencing.
 
-## Quickstart Guide
+---
 
-Follow these steps to run CampaignForge locally.
+## 🛠️ Quickstart Guide
 
 ### 1. Setup the Backend
-1. Open a terminal and navigate to the backend directory:
+1. Navigate to the `backend/` directory:
    ```bash
    cd backend
    ```
 2. Create and activate a Python virtual environment:
    ```bash
    python -m venv venv
-   # On Windows:
+   # Windows:
    .\venv\Scripts\activate
-   # On macOS/Linux:
+   # macOS/Linux:
    source venv/bin/activate
    ```
-3. Install the dependencies:
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-4. Insert your API Key:
-   Open the `backend/.env` file and replace the placeholder with your actual Google Gemini API key:
+4. Configure your environment:
+   Create a `.env` file in the `backend/` folder and add your Groq API key:
    ```env
-   GEMINI_API_KEY="AIzaSy...your-actual-key"
+   GROQ_API_KEY="gsk_your_actual_key_here"
    ```
 5. Start the FastAPI server:
    ```bash
    uvicorn main:app --reload --port 8000
    ```
-   *(The backend API and LangGraph streaming endpoint are now running at `http://localhost:8000`)*
 
 ### 2. Setup the Frontend
-1. Open a new, second terminal and navigate to the frontend directory:
+1. Navigate to the `frontend/` directory:
    ```bash
    cd frontend
    ```
-2. Install the Node.js dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. Start the Next.js development server:
+3. Start the UI:
    ```bash
    npm run dev
    ```
-   *(The agent dashboard resolves at `http://localhost:3000`)*
 
-### 3. Run the Automation
-Navigate to **http://localhost:3000** in your browser. Paste any technical document into the left-hand input module and click **Deploy Agents**. Watch as the autonomous workflow extracts facts, generates drafts, applies deterministic guardrails, and renders your final verified campaign!
+### 3. Deploy Your First Campaign
+Open **http://localhost:3000**, choose your input method (Text, File, or URL), and click **Deploy Agents**. Watch the researcher and copywriter work in real-time, and download your finalized, editor-approved campaign assets with one click!
