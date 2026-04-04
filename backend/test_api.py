@@ -1,19 +1,15 @@
 import os
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 
 # Load environment variables
 load_dotenv()
 
-# Force mapping just in case LangChain looks for GOOGLE_API_KEY
-if "GEMINI_API_KEY" in os.environ:
-    os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
-
 try:
-    print("Initializing Gemini 3 Flash Preview...")
-    llm = ChatGoogleGenerativeAI(model="gemini-3-flash-preview", temperature=0)
+    print("Initializing Groq Llama 3.3...")
+    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)
     
-    print("Sending ping to Google's servers...")
+    print("Sending ping to Groq's servers...")
     response = llm.invoke("Hello, world! Respond with 'Connection Successful' if you can read this.")
     
     print("\n--- RESPONSE ---")

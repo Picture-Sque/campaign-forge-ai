@@ -22,12 +22,15 @@ class GraphState(TypedDict):
     editor_feedback: str
     status: str
     error: str
+    confidence_score: int
 
 # Node 1: Researcher Agent Schema
 class FactSheet(BaseModel):
     core_features: list[str] = Field(description="Strict list of core capabilities and product features.")
     technical_specs: list[str] = Field(description="Strict list of technical specifications.")
     target_audience: str = Field(description="The primary target audience group for this product.")
+    value_proposition: str = Field(description="The main value or benefit of the product.")
+    key_benefits: list[str] = Field(description="A list of key benefits or outcomes for users.")
     ambiguous_statements: list[str] = Field(default_factory=list, description="A list of any vague, confusing, subjective, or contradictory statements found in the source text.")
 
 def researcher_agent(state: GraphState):
@@ -41,10 +44,15 @@ def researcher_agent(state: GraphState):
         return {"error": "Insufficient technical data found in source document to generate a campaign."}
         
     prompt = (
-        "Analyze the following technical document and extract the core features, technical specs, and target audience.\n"
-        "CRITICAL: You must aggressively look for ambiguous, vague, or unquantified marketing fluff in the source text "
-        "(e.g., 'super fast', 'industry leading', 'best in class', 'revolutionary') and extract them into the ambiguous_statements list.\n\n"
-        f"{source_text}"
+        "Analyze the following technical document and extract the following structured fields:\n"
+        "1. Core Features: A strict list of core capabilities and product features.\n"
+        "2. Technical Specs: A strict list of technical specifications (e.g., integrations, performance metrics).\n"
+        "3. Target Audience: The primary target audience group for this product.\n"
+        "4. Value Proposition: A single concise sentence summarizing the main value or overarching benefit this product delivers to its users.\n"
+        "5. Key Benefits: A list of concrete, user-facing benefits or outcomes that this product enables.\n"
+        "6. Ambiguous Statements: You must aggressively look for vague, unquantified, or marketing-fluff language "
+        "(e.g., 'super fast', 'industry leading', 'best in class', 'revolutionary') and extract them into this list.\n\n"
+        f"Source Document:\n{source_text}"
     )
     structured_llm = llm.with_structured_output(FactSheet)
     
@@ -62,6 +70,7 @@ class CopywriterDrafts(BaseModel):
     blog: str = Field(description="A 500-word blog post based on facts.")
     social_thread: str = Field(description="A 5-post social media thread.")
     email_teaser: str = Field(description="A short promotional email teaser.")
+    justification: str = Field(description="Explain exactly which facts were used and how the value proposition influenced the content.")
 
 def copywriter_agent(state: GraphState):
     """Generates the campaign drafts constrained safely to the extracted Fact-Sheet."""
@@ -72,6 +81,15 @@ def copywriter_agent(state: GraphState):
     prompt = "You are a Creative Copywriter. Only use the extracted verified facts below to generate the marketing artifacts.\n"
     prompt += "CRITICAL RULE: You must NEVER invent prices, costs, or discounts. Do not use the $ symbol under any circumstances unless a price is explicitly provided in the extracted facts.\n"
     prompt += f"Verified Facts: {fact_sheet}\n"
+    if editor_feedback:
+        prompt += f"Editor Feedback to address: {editor_feedback}\n"
+    prompt += (
+        "After generating the blog, social thread, and email teaser, you MUST fill in the 'justification' field. "
+        "In this field, think step by step: "
+        "(1) List the 2-3 most important facts from the Fact Sheet you chose to highlight and explain WHY you chose them. "
+        "(2) Explain how the Value Proposition shaped the central theme or angle of your writing. "
+        "(3) Describe any creative decisions you made (tone, format, structure) and why they serve the Target Audience.\n"
+    )
     
     structured_llm = llm.with_structured_output(CopywriterDrafts)
     drafts = structured_llm.invoke(prompt)
@@ -80,8 +98,9 @@ def copywriter_agent(state: GraphState):
 
 # Node 3: Editor-in-Chief Schema
 class EditorDecision(BaseModel):
-    is_approved: bool = Field(description="Set to true if there are absolutely zero hallucinations.")
-    feedback: str = Field(description="If rejected, describe exactly what unverified feature or price was hallucinated.")
+    is_approved: bool = Field(description="Set to true if there are absolutely zero hallucinations AND the confidence score is 70 or above.")
+    feedback: str = Field(description="If rejected, describe exactly what unverified feature or price was hallucinated, or which core facts/value proposition were missing.")
+    confidence_score: int = Field(description="A confidence score from 0 to 100 indicating how perfectly the drafts align with the extracted facts and value proposition.")
 
 def editor_agent(state: GraphState):
     """Acts as gatekeeper and rigorously checks the drafts against original facts."""
@@ -109,7 +128,18 @@ def editor_agent(state: GraphState):
     prompt = "You are the Editor-in-Chief. Cross-reference the drafts strictly against the verified fact sheet.\n"
     prompt += f"Fact Sheet: {fact_sheet}\n"
     prompt += f"Drafts: {drafts}\n"
-    prompt += "\nReject the draft if there is ANY mention of features, capabilities, or pricing not present in the fact sheet."
+    prompt += (
+        "\nYour task has two parts:\n"
+        "PART 1 - HALLUCINATION CHECK: Reject the draft if there is ANY mention of features, capabilities, or pricing not present in the fact sheet.\n"
+        "PART 2 - CONFIDENCE SCORE: Calculate an integer score from 0 to 100 using these strict rules:\n"
+        "  - Start at 100.\n"
+        "  - Deduct 20 points for each core feature from the fact sheet that is NOT mentioned anywhere in the drafts.\n"
+        "  - Deduct 25 points if the Value Proposition is not clearly highlighted or reflected in the drafts' central theme.\n"
+        "  - Deduct 10 points for each key benefit from the fact sheet that is completely absent from the drafts.\n"
+        "  - Deduct 15 points for any hallucinated fact, capability, or price not in the fact sheet.\n"
+        "CRITICAL RULE: If the confidence_score is below 70, you MUST set is_approved to false, even if there are no explicit hallucinations. "
+        "A score below 70 means the draft is factually incomplete and fails editorial standards.\n"
+    )
     
     structured_llm = llm.with_structured_output(EditorDecision)
     decision = structured_llm.invoke(prompt)
@@ -119,6 +149,7 @@ def editor_agent(state: GraphState):
     return {
         "status": status,
         "editor_feedback": decision.feedback,
+        "confidence_score": decision.confidence_score,
         "revision_count": rev_count + 1
     }
 

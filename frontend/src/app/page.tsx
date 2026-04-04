@@ -18,6 +18,7 @@ export default function AgentRoom() {
   const [finalState, setFinalState] = useState<any>(null);
   const [activeAgent, setActiveAgent] = useState<ActiveAgent>('None');
   const [previewMode, setPreviewMode] = useState<'Desktop' | 'Mobile'>('Desktop');
+  const [showReasoning, setShowReasoning] = useState(false);
 
   const chatEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -55,7 +56,8 @@ export default function AgentRoom() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/stream", {
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+      const response = await fetch(`${backendUrl}/stream`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -264,6 +266,33 @@ export default function AgentRoom() {
                 <h3 className="text-2xl font-black text-gray-100 uppercase tracking-widest">Final Campaign Build</h3>
                 
                 <div className="flex items-center gap-3">
+                  {/* Editor Confidence Badge */}
+                  {finalState.confidence_score > 0 && (() => {
+                    const score = finalState.confidence_score;
+                    const isGreen = score >= 90;
+                    const color = isGreen
+                      ? { text: 'text-emerald-400', border: 'border-emerald-500/50', bg: 'bg-emerald-950/30', glow: 'shadow-[0_0_16px_rgba(52,211,153,0.25)]', bar: 'bg-emerald-500', label: 'text-emerald-300' }
+                      : { text: 'text-amber-400',   border: 'border-amber-500/50',   bg: 'bg-amber-950/30',   glow: 'shadow-[0_0_16px_rgba(251,191,36,0.2)]',  bar: 'bg-amber-500',   label: 'text-amber-300'  };
+                    return (
+                      <div className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border ${color.border} ${color.bg} ${color.glow} transition-all duration-500`}>
+                        <div className="flex flex-col items-center min-w-[36px]">
+                          <span className={`text-lg font-black leading-none ${color.text}`}>{score}<span className="text-xs font-bold">%</span></span>
+                          <span className={`text-[8px] font-bold uppercase tracking-widest mt-0.5 ${color.label}`}>Confidence</span>
+                        </div>
+                        <div className="flex flex-col gap-1.5">
+                          <span className={`text-[9px] font-black uppercase tracking-widest ${color.text}`}>Editor Score</span>
+                          <div className="w-20 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full transition-all duration-700 ${color.bar}`}
+                              style={{ width: `${score}%` }}
+                            />
+                          </div>
+                          <span className={`text-[8px] ${color.label}`}>{isGreen ? 'Perfect Match ✓' : 'Approved ✓'}</span>
+                        </div>
+                      </div>
+                    );
+                  })()}
+
                   {/* Responsive Output Toggle */}
                   <div className="flex bg-gray-900 rounded-xl p-1 border border-gray-800">
                     <button 
@@ -281,6 +310,64 @@ export default function AgentRoom() {
                   </div>
                 </div>
               </div>
+
+              {/* FACT SHEET - Full Width */}
+              {finalState.fact_sheet && (
+                <div className="bg-gray-900/60 border border-violet-500/30 rounded-3xl p-6 shadow-[0_0_25px_rgba(139,92,246,0.1)] backdrop-blur-sm mb-2">
+                  <h4 className="text-xs font-bold text-violet-400 mb-5 uppercase tracking-widest flex items-center gap-2 border-b border-violet-500/20 pb-3">
+                    🧠 Extracted Fact Sheet
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {/* Value Proposition */}
+                    {finalState.fact_sheet.value_proposition && (
+                      <div className="col-span-full bg-violet-950/30 border border-violet-500/20 rounded-2xl p-4">
+                        <p className="text-[10px] font-black text-violet-400 uppercase tracking-widest mb-2">⚡ Value Proposition</p>
+                        <p className="text-gray-200 text-sm leading-relaxed">{finalState.fact_sheet.value_proposition}</p>
+                      </div>
+                    )}
+                    {/* Target Audience */}
+                    {finalState.fact_sheet.target_audience && (
+                      <div className="bg-gray-800/50 border border-gray-700/50 rounded-2xl p-4">
+                        <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-2">🎯 Target Audience</p>
+                        <p className="text-gray-300 text-sm leading-relaxed">{finalState.fact_sheet.target_audience}</p>
+                      </div>
+                    )}
+                    {/* Key Benefits */}
+                    {finalState.fact_sheet.key_benefits?.length > 0 && (
+                      <div className="bg-gray-800/50 border border-gray-700/50 rounded-2xl p-4">
+                        <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-2">✅ Key Benefits</p>
+                        <ul className="space-y-1.5">
+                          {finalState.fact_sheet.key_benefits.map((b: string, i: number) => (
+                            <li key={i} className="text-gray-300 text-xs flex gap-2"><span className="text-emerald-500 mt-0.5">•</span>{b}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {/* Core Features */}
+                    {finalState.fact_sheet.core_features?.length > 0 && (
+                      <div className="bg-gray-800/50 border border-gray-700/50 rounded-2xl p-4">
+                        <p className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-2">🔧 Core Features</p>
+                        <ul className="space-y-1.5">
+                          {finalState.fact_sheet.core_features.map((f: string, i: number) => (
+                            <li key={i} className="text-gray-300 text-xs flex gap-2"><span className="text-blue-500 mt-0.5">•</span>{f}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {/* Technical Specs */}
+                    {finalState.fact_sheet.technical_specs?.length > 0 && (
+                      <div className="bg-gray-800/50 border border-gray-700/50 rounded-2xl p-4">
+                        <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-2">⚙️ Technical Specs</p>
+                        <ul className="space-y-1.5">
+                          {finalState.fact_sheet.technical_specs.map((s: string, i: number) => (
+                            <li key={i} className="text-gray-300 text-xs flex gap-2"><span className="text-cyan-500 mt-0.5">•</span>{s}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* TWO COLUMN GRID */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -329,6 +416,32 @@ export default function AgentRoom() {
                       <h4 className="text-xs font-bold text-emerald-400 mb-4 uppercase tracking-wider">Email Teaser</h4>
                       <p className="text-gray-300 whitespace-pre-wrap text-[13px] leading-relaxed font-light">{finalState.drafts.email_teaser}</p>
                     </div>
+
+                    {/* Chain-of-Thought Reasoning Toggle */}
+                    {finalState.drafts.justification && (
+                      <div className={`w-full ${previewMode === 'Mobile' ? 'max-w-[375px]' : ''}`}>
+                        <button
+                          onClick={() => setShowReasoning(prev => !prev)}
+                          className="w-full flex items-center justify-between px-5 py-3.5 rounded-2xl border border-violet-500/30 bg-violet-950/20 hover:bg-violet-950/40 hover:border-violet-500/50 text-violet-400 hover:text-violet-300 transition-all duration-300"
+                        >
+                          <span className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest">
+                            <span className={`transition-transform duration-300 ${showReasoning ? 'scale-110' : ''}`}>🧠</span>
+                            {showReasoning ? 'Hide AI Chain-of-Thought' : 'View AI Chain-of-Thought'}
+                          </span>
+                          <span className={`text-lg font-thin transition-transform duration-300 inline-block ${showReasoning ? 'rotate-180' : ''}`}>⌄</span>
+                        </button>
+
+                        {showReasoning && (
+                          <div className="mt-3 bg-gray-950/60 border border-violet-500/20 rounded-2xl p-5 shadow-[0_0_30px_rgba(139,92,246,0.08)] animate-in fade-in slide-in-from-top-2 duration-300">
+                            <p className="text-[10px] font-black text-violet-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
+                              Copywriter Reasoning Log
+                            </p>
+                            <p className="text-gray-300 text-xs leading-relaxed font-mono whitespace-pre-wrap">{finalState.drafts.justification}</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
 

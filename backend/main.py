@@ -14,7 +14,7 @@ app = FastAPI(title="CampaignForge API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -53,7 +53,7 @@ async def stream_campaign(payload: dict):
     initial_state = {
         "source_text": source_text,
         "fact_sheet": {}, "drafts": {}, "revision_count": 0,
-        "editor_feedback": "", "status": "", "error": ""
+        "editor_feedback": "", "status": "", "error": "", "confidence_score": 0
     }
 
     async def event_generator():
