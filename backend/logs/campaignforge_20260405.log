@@ -1,0 +1,70 @@
+2026-04-05 19:40:37 - logger - INFO - Health check requested
+2026-04-05 19:41:57 - logger - INFO - Campaign request received
+2026-04-05 19:41:57 - logger - INFO - Starting campaign workflow
+2026-04-05 19:41:57 - logger - INFO - Researcher agent starting
+2026-04-05 19:41:58 - logger - INFO - Researcher agent completed successfully
+2026-04-05 19:41:58 - logger - INFO - Researcher completed successfully
+2026-04-05 19:41:58 - logger - INFO - Copywriter agent starting
+2026-04-05 19:42:00 - logger - INFO - Copywriter agent completed successfully
+2026-04-05 19:42:00 - logger - INFO - Copywriter processing
+2026-04-05 19:42:00 - logger - INFO - Editor agent starting
+2026-04-05 19:42:00 - logger - INFO - Editor decision: approved (confidence: 90%)
+2026-04-05 19:42:00 - logger - INFO - Draft approved by editor
+2026-04-05 19:42:00 - logger - INFO - Campaign workflow completed successfully
+2026-04-05 19:47:46 - logger - INFO - Campaign request received
+2026-04-05 19:47:46 - logger - INFO - Starting campaign workflow
+2026-04-05 19:47:46 - logger - INFO - Researcher agent starting
+2026-04-05 19:47:47 - logger - INFO - Researcher agent completed successfully
+2026-04-05 19:47:47 - logger - INFO - Researcher completed successfully
+2026-04-05 19:47:47 - logger - INFO - Copywriter agent starting
+2026-04-05 19:47:49 - logger - INFO - Copywriter agent completed successfully
+2026-04-05 19:47:49 - logger - INFO - Copywriter processing
+2026-04-05 19:47:49 - logger - INFO - Editor agent starting
+2026-04-05 19:47:49 - logger - INFO - Editor decision: approved (confidence: 100%)
+2026-04-05 19:47:49 - logger - INFO - Draft approved by editor
+2026-04-05 19:47:49 - logger - INFO - Campaign workflow completed successfully
+2026-04-05 19:50:05 - logger - INFO - Campaign request received
+2026-04-05 19:50:05 - logger - INFO - Scraping URL: https://www.apple.com/macbook-air/
+2026-04-05 19:50:05 - logger - INFO - Scraping URL: https://www.apple.com/macbook-air/
+2026-04-05 19:50:06 - logger - INFO - Successfully scraped 8000 characters from https://www.apple.com/macbook-air/
+2026-04-05 19:50:06 - logger - INFO - Starting campaign workflow
+2026-04-05 19:50:06 - logger - INFO - Researcher agent starting
+2026-04-05 19:50:07 - logger - INFO - Researcher agent completed successfully
+2026-04-05 19:50:07 - logger - INFO - Researcher completed successfully
+2026-04-05 19:50:07 - logger - INFO - Copywriter agent starting
+2026-04-05 19:50:09 - logger - INFO - Copywriter agent completed successfully
+2026-04-05 19:50:09 - logger - INFO - Copywriter processing
+2026-04-05 19:50:09 - logger - INFO - Editor agent starting
+2026-04-05 19:50:09 - logger - INFO - Editor decision: rejected (confidence: 70%)
+2026-04-05 19:50:09 - logger - WARNING - Draft rejected: The drafts do not mention 'macOS Tahoe operating system' as a core feature, and the email teaser contains the ambiguous statement 'game-changing laptop'.
+2026-04-05 19:50:09 - logger - INFO - Copywriter agent starting
+2026-04-05 19:50:11 - logger - INFO - Copywriter agent completed successfully
+2026-04-05 19:50:11 - logger - INFO - Copywriter processing
+2026-04-05 19:50:11 - logger - INFO - Editor agent starting
+2026-04-05 19:50:12 - logger - INFO - Editor decision: approved (confidence: 70%)
+2026-04-05 19:50:12 - logger - INFO - Draft approved by editor
+2026-04-05 19:50:12 - logger - INFO - Campaign workflow completed successfully
+2026-04-05 20:53:54 - logger - INFO - Campaign request received
+2026-04-05 20:53:54 - logger - INFO - Starting campaign workflow
+2026-04-05 20:53:54 - logger - INFO - Researcher agent starting
+2026-04-05 20:53:55 - logger - INFO - Researcher agent completed successfully
+2026-04-05 20:53:55 - logger - INFO - Researcher completed successfully
+2026-04-05 20:53:55 - logger - INFO - Copywriter agent starting
+2026-04-05 20:53:57 - logger - INFO - Copywriter agent completed successfully
+2026-04-05 20:53:57 - logger - INFO - Copywriter processing
+2026-04-05 20:53:57 - logger - INFO - Editor agent starting
+2026-04-05 20:53:58 - logger - INFO - Editor decision: approved (confidence: 100%)
+2026-04-05 20:53:58 - logger - INFO - Draft approved by editor
+2026-04-05 20:53:58 - logger - INFO - Campaign workflow completed successfully
+2026-04-05 21:09:02 - logger - INFO - Campaign request received
+2026-04-05 21:09:02 - logger - INFO - Starting campaign workflow
+2026-04-05 21:09:02 - logger - INFO - Researcher agent starting
+2026-04-05 21:09:02 - logger - INFO - Researcher agent completed successfully
+2026-04-05 21:09:02 - logger - INFO - Researcher completed successfully
+2026-04-05 21:09:02 - logger - INFO - Copywriter agent starting
+2026-04-05 21:09:05 - logger - INFO - Copywriter agent completed successfully
+2026-04-05 21:09:05 - logger - INFO - Copywriter processing
+2026-04-05 21:09:05 - logger - INFO - Editor agent starting
+2026-04-05 21:09:06 - logger - INFO - Editor decision: approved (confidence: 90%)
+2026-04-05 21:09:06 - logger - INFO - Draft approved by editor
+2026-04-05 21:09:06 - logger - INFO - Campaign workflow completed successfully

@@ -1,0 +1,120 @@
+2026-04-06 21:34:38 - logger - INFO - Campaign request received
+2026-04-06 21:34:38 - logger - INFO - Starting campaign workflow
+2026-04-06 21:34:38 - logger - INFO - Researcher agent starting
+2026-04-06 21:34:39 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:34:39 - logger - INFO - Researcher completed successfully
+2026-04-06 21:34:39 - logger - INFO - Copywriter agent starting
+2026-04-06 21:34:42 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:34:42 - logger - INFO - Copywriter processing
+2026-04-06 21:34:42 - logger - INFO - Editor agent starting
+2026-04-06 21:34:42 - logger - INFO - Editor decision: approved (confidence: 90%)
+2026-04-06 21:34:42 - logger - INFO - Draft approved by editor
+2026-04-06 21:34:42 - logger - INFO - Campaign workflow completed successfully
+2026-04-06 21:36:52 - logger - INFO - Campaign request received
+2026-04-06 21:36:52 - logger - INFO - Scraping URL: https://www.apple.com/in/macbook-neo/
+2026-04-06 21:36:52 - logger - INFO - Scraping URL: https://www.apple.com/in/macbook-neo/
+2026-04-06 21:36:54 - logger - INFO - Successfully scraped 8000 characters from https://www.apple.com/in/macbook-neo/
+2026-04-06 21:36:54 - logger - INFO - Starting campaign workflow
+2026-04-06 21:36:54 - logger - INFO - Researcher agent starting
+2026-04-06 21:36:55 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:36:55 - logger - INFO - Researcher completed successfully
+2026-04-06 21:36:55 - logger - INFO - Copywriter agent starting
+2026-04-06 21:36:57 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:36:57 - logger - INFO - Copywriter processing
+2026-04-06 21:36:57 - logger - INFO - Editor agent starting
+2026-04-06 21:36:58 - logger - INFO - Editor decision: approved (confidence: 85%)
+2026-04-06 21:36:58 - logger - INFO - Draft approved by editor
+2026-04-06 21:36:58 - logger - INFO - Campaign workflow completed successfully
+2026-04-06 21:42:32 - logger - INFO - Campaign request received
+2026-04-06 21:42:32 - logger - INFO - Scraping URL: https://www.apple.com/in/macbook-neo/
+2026-04-06 21:42:32 - logger - INFO - Scraping URL: https://www.apple.com/in/macbook-neo/
+2026-04-06 21:42:33 - logger - INFO - Successfully scraped 8000 characters from https://www.apple.com/in/macbook-neo/
+2026-04-06 21:42:33 - logger - INFO - Starting campaign workflow
+2026-04-06 21:42:33 - logger - INFO - Researcher agent starting
+2026-04-06 21:42:35 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:42:35 - logger - INFO - Researcher completed successfully
+2026-04-06 21:42:35 - logger - INFO - Copywriter agent starting
+2026-04-06 21:42:37 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:42:37 - logger - INFO - Copywriter processing
+2026-04-06 21:42:37 - logger - INFO - Editor agent starting
+2026-04-06 21:42:38 - logger - INFO - Editor decision: approved (confidence: 85%)
+2026-04-06 21:42:38 - logger - INFO - Draft approved by editor
+2026-04-06 21:42:38 - logger - INFO - Campaign workflow completed successfully
+2026-04-06 21:42:43 - logger - INFO - Campaign request received
+2026-04-06 21:42:43 - logger - INFO - Starting campaign workflow
+2026-04-06 21:42:43 - logger - INFO - Researcher agent starting
+2026-04-06 21:42:44 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:42:44 - logger - INFO - Researcher completed successfully
+2026-04-06 21:42:44 - logger - INFO - Copywriter agent starting
+2026-04-06 21:42:45 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:42:45 - logger - INFO - Copywriter processing
+2026-04-06 21:42:45 - logger - INFO - Editor agent starting
+2026-04-06 21:42:46 - logger - INFO - Editor decision: approved (confidence: 90%)
+2026-04-06 21:42:46 - logger - INFO - Draft approved by editor
+2026-04-06 21:42:46 - logger - INFO - Campaign workflow completed successfully
+2026-04-06 21:47:19 - logger - INFO - Campaign request received
+2026-04-06 21:47:19 - logger - INFO - Starting campaign workflow
+2026-04-06 21:47:19 - logger - INFO - Researcher agent starting
+2026-04-06 21:47:20 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:47:20 - logger - INFO - Researcher completed successfully
+2026-04-06 21:47:20 - logger - INFO - Copywriter agent starting
+2026-04-06 21:47:22 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:47:22 - logger - INFO - Copywriter processing
+2026-04-06 21:47:22 - logger - INFO - Editor agent starting
+2026-04-06 21:47:23 - logger - INFO - Editor decision: approved (confidence: 90%)
+2026-04-06 21:47:23 - logger - INFO - Draft approved by editor
+2026-04-06 21:47:23 - logger - INFO - Campaign workflow completed successfully
+2026-04-06 21:50:50 - logger - INFO - Campaign request received
+2026-04-06 21:50:50 - logger - INFO - Starting campaign workflow
+2026-04-06 21:50:50 - logger - INFO - Researcher agent starting
+2026-04-06 21:50:51 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:50:51 - logger - INFO - Researcher completed successfully
+2026-04-06 21:50:51 - logger - INFO - Copywriter agent starting
+2026-04-06 21:50:54 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:50:54 - logger - INFO - Copywriter processing
+2026-04-06 21:50:54 - logger - INFO - Editor agent starting
+2026-04-06 21:50:55 - logger - INFO - Editor decision: approved (confidence: 100%)
+2026-04-06 21:50:55 - logger - INFO - Draft approved by editor
+2026-04-06 21:50:55 - logger - INFO - Campaign workflow completed successfully
+2026-04-06 21:52:30 - logger - INFO - Campaign request received
+2026-04-06 21:52:30 - logger - INFO - Scraping URL: https://www.apple.com/in/macbook-neo/
+2026-04-06 21:52:30 - logger - INFO - Scraping URL: https://www.apple.com/in/macbook-neo/
+2026-04-06 21:52:32 - logger - INFO - Successfully scraped 8000 characters from https://www.apple.com/in/macbook-neo/
+2026-04-06 21:52:32 - logger - INFO - Starting campaign workflow
+2026-04-06 21:52:32 - logger - INFO - Researcher agent starting
+2026-04-06 21:52:34 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:52:34 - logger - INFO - Researcher completed successfully
+2026-04-06 21:52:34 - logger - INFO - Copywriter agent starting
+2026-04-06 21:52:36 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:52:36 - logger - INFO - Copywriter processing
+2026-04-06 21:52:36 - logger - INFO - Editor agent starting
+2026-04-06 21:52:36 - logger - INFO - Editor decision: approved (confidence: 85%)
+2026-04-06 21:52:36 - logger - INFO - Draft approved by editor
+2026-04-06 21:52:36 - logger - INFO - Campaign workflow completed successfully
+2026-04-06 21:58:47 - logger - INFO - Campaign request received
+2026-04-06 21:58:47 - logger - INFO - Scraping URL: https://www.apple.com/in/macbook-neo/
+2026-04-06 21:58:47 - logger - INFO - Scraping URL: https://www.apple.com/in/macbook-neo/
+2026-04-06 21:58:49 - logger - INFO - Successfully scraped 8000 characters from https://www.apple.com/in/macbook-neo/
+2026-04-06 21:58:49 - logger - INFO - Starting campaign workflow
+2026-04-06 21:58:49 - logger - INFO - Researcher agent starting
+2026-04-06 21:58:50 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:58:50 - logger - INFO - Researcher completed successfully
+2026-04-06 21:58:50 - logger - INFO - Copywriter agent starting
+2026-04-06 21:58:52 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:58:52 - logger - INFO - Copywriter processing
+2026-04-06 21:58:52 - logger - INFO - Editor agent starting
+2026-04-06 21:58:52 - logger - INFO - Editor decision: approved (confidence: 85%)
+2026-04-06 21:58:52 - logger - INFO - Draft approved by editor
+2026-04-06 21:58:52 - logger - INFO - Campaign workflow completed successfully
+2026-04-06 21:59:16 - logger - INFO - Campaign request received
+2026-04-06 21:59:16 - logger - INFO - Starting campaign workflow
+2026-04-06 21:59:16 - logger - INFO - Researcher agent starting
+2026-04-06 21:59:17 - logger - INFO - Researcher agent completed successfully
+2026-04-06 21:59:17 - logger - INFO - Researcher completed successfully
+2026-04-06 21:59:17 - logger - INFO - Copywriter agent starting
+2026-04-06 21:59:19 - logger - INFO - Copywriter agent completed successfully
+2026-04-06 21:59:19 - logger - INFO - Copywriter processing
+2026-04-06 21:59:19 - logger - INFO - Editor agent starting
+2026-04-06 21:59:20 - logger - INFO - Editor decision: approved (confidence: 90%)
+2026-04-06 21:59:20 - logger - INFO - Draft approved by editor
+2026-04-06 21:59:20 - logger - INFO - Campaign workflow completed successfully
